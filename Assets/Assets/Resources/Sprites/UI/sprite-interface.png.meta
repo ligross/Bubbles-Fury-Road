@@ -1,0 +1,297 @@
+fileFormatVersion: 2
+guid: 01a2f87160139694aa38d86539191505
+timeCreated: 1447073090
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: sprite-interface_0
+    21300002: sprite-interface_1
+    21300004: sprite-interface_2
+    21300006: sprite-interface_3
+    21300008: sprite-interface_4
+    21300010: sprite-interface_5
+    21300012: sprite-interface_6
+    21300014: sprite-interface_7
+    21300016: sprite-interface_8
+    21300018: sprite-interface_9
+    21300020: sprite-interface_10
+    21300022: sprite-interface_11
+    21300024: sprite-interface_12
+    21300026: sprite-interface_13
+    21300028: sprite-interface_14
+    21300030: sprite-interface_15
+    21300032: sprite-interface_16
+    21300034: sprite-interface_17
+    21300036: sprite-interface_18
+    21300038: sprite-interface_19
+    21300040: sprite-interface_20
+    21300042: sprite-interface_21
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: sprite-interface_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1821
+        width: 960
+        height: 132
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1583
+        width: 960
+        height: 220
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1308
+        width: 960
+        height: 245
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_4
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 1130
+        width: 135
+        height: 123
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_5
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 980
+        width: 135
+        height: 123
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_6
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 850
+        width: 115
+        height: 104
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_7
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 450
+        width: 697
+        height: 378
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_8
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 701
+        width: 115
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_9
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 549
+        width: 112
+        height: 103
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_10
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 400
+        width: 110
+        height: 103
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_11
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 116
+        width: 582
+        height: 271
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_12
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 231
+        width: 135
+        height: 123
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 55
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_14
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 55
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 355
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 376
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 354
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_18
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 55
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_19
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 40
+        width: 49
+        height: 45
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_20
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 11
+        width: 210
+        height: 95
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 13, w: 0}
+    - name: sprite-interface_21
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 81
+        width: 135
+        height: 123
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprite-interface_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 851
+        width: 733
+        height: 410
+      alignment: 9
+      pivot: {x: 6.44702625, y: -3.51374173}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

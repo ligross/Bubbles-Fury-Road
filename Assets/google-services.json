@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "961945122034",
+    "firebase_url": "https://bubbles-9bd7b.firebaseio.com",
+    "project_id": "bubbles-9bd7b",
+    "storage_bucket": "bubbles-9bd7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961945122034:android:f2f30f772277f512",
+        "android_client_info": {
+          "package_name": "com.TaboretLabs.Bubbles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961945122034-b75m079bb3fk3nc7qqkvmces5ri6r7cq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsnOZVdEC7QWERr3ghRSvjrZdHzD8inNc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

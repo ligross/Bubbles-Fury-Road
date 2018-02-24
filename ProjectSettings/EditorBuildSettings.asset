@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/MainMenu.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/PlayScene.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/AboutGameScene.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/RatingScene.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/TrainingScene.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: e20f8fba1e732e84ca2c7c45570601bb
+  - enabled: 0
+    path: Assets/_Scenes/MainMenu.unity
+    guid: 14c10fecd8a4e364881362d1752b646f
+  - enabled: 1
+    path: Assets/_Scenes/PlayScene.unity
+    guid: 944a2a69de1c0c94fa8db09947c7ba45
+  - enabled: 1
+    path: Assets/_Scenes/PhotoScene.unity
+    guid: b3151ac2caa624e41abeae4845e52a41
+  - enabled: 1
+    path: Assets/_Scenes/AboutGameScene.unity
+    guid: 3249832f08ace6442ab25af03a4bb0e5
+  - enabled: 0
+    path: Assets/_Scenes/LeaderboardScene.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/_Scenes/RatingScene.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/_Scenes/TrainingScene.unity
+    guid: 057dbf235c51716408bbf455541e50b8
+  - enabled: 1
+    path: Assets/_Scenes/GalleryScene.unity
+    guid: 40d1abe79c1ff4018a1d12b8168fe89d
