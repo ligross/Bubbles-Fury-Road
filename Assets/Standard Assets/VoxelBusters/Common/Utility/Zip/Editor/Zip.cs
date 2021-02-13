@@ -121,8 +121,8 @@ namespace VoxelBusters.Utility
 #if IO_UNSUPPORTED_PLATFORM
 			Debug.LogWarning("[Zip] Not supported.");
 #else
-			string 		_zippedFilePath		= AssetsUtility.GUIDToAssetAbsolutePath(Selection.assetGUIDs[0]);
-			FileInfo	_fileInfo			= new FileInfo(_zippedFilePath);
+			string 		_zippedFilePath	= AssetDatabaseUtils.GUIDToAssetAbsolutePath(Selection.assetGUIDs[0]);
+			FileInfo	_fileInfo		= new FileInfo(_zippedFilePath);
 			
 			DecompressToDirectory(_zippedFilePath, _fileInfo.Directory.FullName, (string _outputMessage)=>{
 				Console.WriteLine(_outputMessage);
@@ -138,7 +138,7 @@ namespace VoxelBusters.Utility
 			if (_guids.Length <= 0)
 				return false;
 
-			string 	_selectedFilePath	= AssetsUtility.GUIDToAssetAbsolutePath(_guids[0]);
+			string 	_selectedFilePath	= AssetDatabaseUtils.GUIDToAssetAbsolutePath(_guids[0]);
 			string	_fileExtension		= Path.GetExtension(_selectedFilePath);
 
 			if (_fileExtension == null)

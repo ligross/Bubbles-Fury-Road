@@ -1,3 +1,33 @@
+1.5.6p1
+If you are upgrading from 1.5.6, no need to uninstall the plugin. Else please follow steps for 1.5.6 upgrade (below)
+[Android] Fix for mime type while sharing
+[Android] Support for Proguard (should work smoothly without any extra setup)
+
+
+1.5.6
+Important : UPGRADE INSTRUCTIONS : "https://tutorials.cpnp.voxelbusters.com/Upgrade%20Guide/upgrade_guide.html"
+***Uninstall (from Window->VoxelBusters Menu) before importing the new update***
+
+
+* [Editor] Updated view of NPSettings for easy access
+* [Editor] Multiple EditorNotification & EditorGameCenter asset files issue fix
+* [Editor] Removed Black List Generator as base version is >= Unity 5.3
+
+* [API] Added RemoveAllKeys method in Cloud Services
+
+* [iOS & Android]CloudServicesInitialise event fix
+
+* [iOS] Added new Apple Review System
+* [iOS] Updated post process exporting
+* [iOS] Fix for Facebook & Twitter Sharing (iOS 11)
+* [iOS]Removed version number dependency for IAP once exported to xcode
+
+* [Android] Oreo Notification Fixes (realted to background limitations)
+* [Android] Updated Play Services Resolver to 1.2.61
+* [Android] Updated Android Dependecies to use XML file
+* [Android] Media Library - Pick Imag - Now max image imported is 2048 - Tested among multiple devices
+* [Android] Media Library - Pick Image - Performance Improvements
+
 1.5.4
 Important : UPGRADE INSTRUCTIONS : "https://tutorials.cpnp.voxelbusters.com/Upgrade%20Guide/upgrade_guide.html"
 ***Uninstall (from Window->VoxelBusters Menu) before importing the new update***  - Skip if you are upgrading from 1.5.3
@@ -117,7 +147,7 @@ Bug Fixes
 1.2
 Important: Delete package folders before updating.[blogs.voxelbusters.com/products/cross-platform-native-plugins/folder-structure]
 
-Feature Request:	
+Feature Request:
 	- Implemented a new system, which makes it possible for user to remove unused features completely.
 	- Mail sharing now includes 2 new fields CC and BCC recipients.
 	- Billing Products includes currency code and currency symbol.
@@ -159,7 +189,7 @@ Fixes:
 Important: Delete package folders before updating.
 
 1.1
-New Features:	
+New Features:
 	- Game Services feature: Game application will make use Game Center, Google Play Services in iOS, Android platforms respectively for Leaderboard, Achievement, Score reporting etc.
 
 Feature Request:
@@ -168,7 +198,7 @@ Feature Request:
 
 Changes:
 	- [iOS] Notification payload format change.
-	- [Android] Small icon for notifications selectable from inspector. 
+	- [Android] Small icon for notifications selectable from inspector.
 	- [Android] Removed conflicts with other plugins regarding Billing interface.
 	- [Android] Cancel Notification, Local Notification bug fixes. Thanks Craig for reporting!
 	- [Android] Restore transaction state fix. Thanks notnotalan for reporting!
@@ -196,12 +226,12 @@ Important: Delete package folders before updating.
 	- Changed from hostName to IPAddress in NetoworkConnectivity.
 	- Added method to initialize Network Connectivity instead of making default call.
 	- Some Minor bug fixes.
-	
+
 
 1.02
 	- *Delete* package folders before updating.
 	- Critical issue fix in notifications
-	- Added RemoteNotificationDemo 
+	- Added RemoteNotificationDemo
 
 1.01
 	- [Android] Fileprovider authority issue bug fix

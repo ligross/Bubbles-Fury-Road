@@ -4,6 +4,7 @@ using System.Collections;
 using Random = UnityEngine.Random;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DoozyUI;
 
 public class GridManager : MonoBehaviour
 {
@@ -25,13 +26,15 @@ public class GridManager : MonoBehaviour
 	public GameObject fireBubble;
 	public GameObject poisonBubble;
     public GameObject flyObject;
+    public GameObject helpText;
+    public Camera myCamera;
 
 
 	//private GameObject fly;
 
 	//width and height of starting grid
 	private int gridWidthInHexes = 6;
-	private int gridHeightInHexes = 20;
+	private int gridHeightInHexes = 10;
 
 	//Hexagon tile width and height in game world
 	private float hexWidth;
@@ -83,7 +86,7 @@ public class GridManager : MonoBehaviour
 
 	IEnumerator DefaultSpawnPercent()
 	{
-		yield return new WaitForSeconds(5f);
+		yield return new WaitForSeconds(30f);
 		bonusSpawnPerc = 0.1f;
 	}
 
@@ -130,19 +133,25 @@ public class GridManager : MonoBehaviour
                         else if (typeChance <= 0.6)
                             hex = Instantiate(freeBubble);
                         else if (typeChance <= 0.8)
-                        	hex = Instantiate (carmaBubble);
+                            hex = Instantiate(carmaBubble);
                         else
                         {
                             hex = Instantiate(scoreBubble);
                         }
                         // TODO uncomment on the next release
-						
-						//else if (typeChance <= 0.87) {
-						//	hex = Instantiate (fireBubble);
-						//} else if (typeChance <= 0.93) {
-						//	hex = Instantiate (poisonBubble);
-						//} else {
-						//	hex = Instantiate (ghostBubble);
+
+                        //else if (typeChance <= 0.87)
+                        //{
+                        //    hex = Instantiate(fireBubble);
+                        //}
+                        //else if (typeChance <= 0.93)
+                        //{
+                        //    hex = Instantiate(poisonBubble);
+                        //}
+                        //else
+                        //{
+                        //    hex = Instantiate(ghostBubble);
+                        //}
 						
 					} else {
 						hex = Instantiate(goodBubble);
@@ -201,4 +210,42 @@ public class GridManager : MonoBehaviour
 	{
 		Debug.Log ("Disabling GridManager");
 	}
+
+    public IEnumerator SpawnHelpText()
+    {
+        Debug.Log("Spawning");
+        Debug.Log(bubblesArray.Count);
+        for (int i = (int)(bubblesArray.Count) - 3 * gridWidthInHexes - 1; i < bubblesArray.Count; i++)
+        {
+            GameObject bubble = bubblesArray[i] as GameObject;
+            GameObject prevBubble = bubblesArray[i - 1] as GameObject;
+            GameObject nextBubble = bubblesArray[i + 1] as GameObject;
+            Debug.Log(i);
+            if (IsObjectVisible(bubble.GetComponent<Renderer>()) &&
+                IsObjectVisible(nextBubble.GetComponent<Renderer>()) &&
+                IsObjectVisible(prevBubble.GetComponent<Renderer>()) &&
+                (!bubble.name.StartsWith("Bad") &&
+                !bubble.name.StartsWith("Fly")))
+            {
+                GameObject help = Instantiate(helpText);
+                help.transform.position = bubble.transform.position + new Vector3(0.9f, 0.9f, 0);
+                //help.transform.position = bubble.transform.position;
+                help.transform.SetParent(bubble.transform);
+                yield return new WaitForSeconds(2f);
+                help.SetActive(true);
+                // help.GetComponent<UIElement>().Show(false);
+                //Destroy(help, 10f);
+                break;
+            }
+        }
+        //help.transform.position = bubble.transform.position;
+        
+    }
+
+    public bool IsObjectVisible(Renderer renderer)
+    {
+        bool isVisible = GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(this.myCamera), renderer.bounds);
+        Debug.Log(isVisible);
+        return isVisible;
+    }
 }

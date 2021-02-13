@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using VoxelBusters.Utility;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -237,18 +238,14 @@ namespace VoxelBusters.NativePlugins
 
 			if (_isLaunchNotification)
 			{
-#if NP_DEBUG
-				Debug.Log("[NotificationService] App was launched from local notification.");
-#endif
+				DebugUtility.Logger.LogWarning(Constants.kDebugTag, "[NotificationService] App was launched from local notification.");
 				
 				if (DidLaunchWithLocalNotificationEvent != null)
 					DidLaunchWithLocalNotificationEvent(_receivedNotification);
 			}
 			else
 			{
-#if NP_DEBUG
-				Debug.Log("[NotificationService] Received new local notification.");
-#endif
+				DebugUtility.Logger.LogWarning(Constants.kDebugTag, "[NotificationService] Received new local notification.");
 
 				if (DidReceiveLocalNotificationEvent != null)
 					DidReceiveLocalNotificationEvent(_receivedNotification);
@@ -304,18 +301,14 @@ namespace VoxelBusters.NativePlugins
 
 			if (_isLaunchNotification)
 			{
-#if NP_DEBUG
-				Debug.Log("[NotificationService] App was launched from remote notification.");
-#endif
+				DebugUtility.Logger.LogWarning(Constants.kDebugTag, "[NotificationService] App was launched from remote notification.");
 				
 				if (DidLaunchWithRemoteNotificationEvent != null)
 					DidLaunchWithRemoteNotificationEvent(_receivedNotification);
 			}
 			else
 			{
-#if NP_DEBUG
-				Debug.Log("[NotificationService] Received remote notification.");
-#endif
+				DebugUtility.Logger.LogWarning(Constants.kDebugTag, "[NotificationService] Received remote notification.");
 				
 				if (DidReceiveRemoteNotificationEvent != null)
 					DidReceiveRemoteNotificationEvent(_receivedNotification);
@@ -330,7 +323,12 @@ namespace VoxelBusters.NativePlugins
 		private void DidReceiveOneSignalNotification (OSNotification _notification)
 		{
 			CrossPlatformNotification	_receivedNotification	= new OneSignalNotificationPayload(_payload: _notification.payload);
-			StartCoroutine(DidReceiveRemoteNotification(_receivedNotification, !_notification.isAppInFocus));
+			StartCoroutine(DidReceiveRemoteNotification(_receivedNotification, false));
+		}
+		private void DidReceiveOneSignalLaunchNotification (OSNotificationOpenedResult _notificationOpened)
+		{
+			CrossPlatformNotification	_receivedNotification	= new OneSignalNotificationPayload(_payload: _notificationOpened.notification.payload);
+			StartCoroutine(DidReceiveRemoteNotification(_receivedNotification, true));
 		}
 #endif
 

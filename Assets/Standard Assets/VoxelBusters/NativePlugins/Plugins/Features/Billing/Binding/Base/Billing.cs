@@ -1,9 +1,8 @@
-﻿using UnityEngine;
+﻿#if USES_BILLING
+using UnityEngine;
 using System.Collections;
-
-#if USES_BILLING
 using System.Collections.Generic;
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -92,7 +91,7 @@ namespace VoxelBusters.NativePlugins
 		{
 			if (m_storeProducts == null)
 			{
-				Console.LogWarning(Constants.kDebugTag, "[Billing] Store products information not found.");
+				DebugUtility.Logger.LogWarning(Constants.kDebugTag, "[Billing] Store products information not found.");
 
 				return null;
 			}
@@ -225,8 +224,8 @@ namespace VoxelBusters.NativePlugins
 		{
 			bool _isPurchased	= false;
 
-			Console.Log(Constants.kDebugTag, string.Format("[Billing] Product= {0} IsPurchased= {1}.", _productID, _isPurchased));
-			
+			DebugUtility.Logger.Log(Constants.kDebugTag, string.Format("[Billing] Product= {0} IsPurchased= {1}.", _productID, _isPurchased));
+
 			return _isPurchased;
 		}
 		

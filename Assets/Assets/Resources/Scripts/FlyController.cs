@@ -8,12 +8,20 @@ public class FlyController : MonoBehaviour {
     public void MouseDown()
     {
 		GameManager.Instance.SetCarma (-5);
-		//Input.GetTouch (0).fingerId
-		if (Time.timeScale != 0 && EventSystem.current.IsPointerOverGameObject (Input.GetTouch (0).fingerId))
+
+		#if UNITY_EDITOR
+		if (Time.timeScale != 0 && EventSystem.current.IsPointerOverGameObject () && GameManager.Instance.started)
+		{
+			if (!GetComponent<RandomFlying> ().enabled) GameManager.Instance.FrightenFly(gameObject);
+			else this.GetComponent<Animator> ().SetTrigger ("Clicked");
+		}
+        #elif UNITY_ANDROID
+		if (Time.timeScale != 0 && EventSystem.current.IsPointerOverGameObject (Input.GetTouch (0).fingerId) && GameManager.Instance.started)
         {
 			if (!GetComponent<RandomFlying> ().enabled) GameManager.Instance.FrightenFly(gameObject);
 			else this.GetComponent<Animator> ().SetTrigger ("Clicked");
         }
+		#endif
 
 		_touchesCount += 1;
 

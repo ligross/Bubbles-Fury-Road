@@ -12,8 +12,8 @@
 #import "RMStoreTransactionReceiptVerificator.h"
 
 // Constants
-const NSString *bundleIdentifier	= @"com.Company.ProductName";
-const NSString *bundleVersion		= @"0";
+const NSString *bundleIdentifier	= nil;
+const NSString *bundleVersion		= nil;
 
 @interface ReceiptVerificationManager ()
 

@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+﻿#if USES_GAME_SERVICES
+using UnityEngine;
 using System.Collections;
-
-#if USES_GAME_SERVICES
 using System;
-using VoxelBusters.DebugPRO;
 using VoxelBusters.Utility;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -233,7 +232,7 @@ namespace VoxelBusters.NativePlugins
 
 			if (_newAchievement == null)
 			{
-				DebugPRO.Console.LogError(Constants.kDebugTag, "[GameServices] Failed to report progress.");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[GameServices] Failed to report progress.");
 				
 				if (_onCompletion != null)
 					_onCompletion(false, "The requested operation could not be completed because Game Service failed to create Achievement object.");
@@ -290,7 +289,7 @@ namespace VoxelBusters.NativePlugins
 			// Check if user id's are valid
 			if (_userIDs == null)
 			{
-				DebugPRO.Console.LogError(Constants.kDebugTag, "[GameServices] UserID list is null.");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[GameServices] UserID list is null.");
 				LoadUsersFinished(null, "The requested operation could not be completed because user id list is null.");
 				return;
 			}
@@ -342,7 +341,7 @@ namespace VoxelBusters.NativePlugins
 
 			if (_newScore == null)
 			{
-				DebugPRO.Console.LogError(Constants.kDebugTag, "[GameServices] Failed to report score.");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[GameServices] Failed to report score.");
 
 				if (_onCompletion != null)
 					_onCompletion(false, "The requested operation could not be completed because Game Service failed to create Score object.");
@@ -432,7 +431,7 @@ namespace VoxelBusters.NativePlugins
 			if (LocalUser.IsAuthenticated)
 				return true;
 
-			DebugPRO.Console.LogError(Constants.kDebugTag, "[GameServices] User not authenticated.");
+			DebugUtility.Logger.LogError(Constants.kDebugTag, "[GameServices] User not authenticated.");
 			return false;
 		}
 
@@ -518,7 +517,7 @@ namespace VoxelBusters.NativePlugins
 			
 			if (_description == null)
 			{
-				DebugPRO.Console.LogError(Constants.kDebugTag, "[GameServices] Failed to report progress.");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[GameServices] Failed to report progress.");
 				
 				if (_onCompletion != null)
 					_onCompletion(false, "The requested operation could not be completed because Game Services couldn't find description for given Achievement identifier.");
@@ -531,7 +530,7 @@ namespace VoxelBusters.NativePlugins
 
 			if (_newAchievement == null)
 			{
-				DebugPRO.Console.LogError(Constants.kDebugTag, "[GameServices] Failed to report progress.");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[GameServices] Failed to report progress.");
 				
 				if (_onCompletion != null)
 					_onCompletion(false, "The requested operation could not be completed because Game Service failed to create Achievement object.");

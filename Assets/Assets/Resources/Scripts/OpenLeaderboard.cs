@@ -1,11 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SocialPlatforms;
+﻿using UnityEngine;
 
 public class OpenLeaderboard : MonoBehaviour {
+    public DoozyUI.UIElement notificationBackground;
+    public DoozyUI.UIElement notificationBody;
 
-	public void OnClick(){
-		Social.ShowLeaderboardUI ();
+    public void OnClick(){
+        if (Social.localUser.authenticated)
+        {
+            Social.ShowLeaderboardUI();
+        }
+        else
+        {
+            notificationBackground.Show(false);
+            notificationBody.Show(false);
+            Debug.Log("Cannot show leaderboard: not authenticated");
+        }
 	}
 }

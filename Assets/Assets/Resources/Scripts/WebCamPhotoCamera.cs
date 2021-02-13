@@ -3,22 +3,28 @@ using System.Collections;
 using System.IO;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Android;
 using System;
+using UnityEngine.SceneManagement;
 
 public class WebCamPhotoCamera : MonoBehaviour 
 {
 	private WebCamTexture webCamTexture;
-	private Quaternion baseRotation;
 
 	public RectTransform imageParent;
 	public Text annotationText;
 
-	public GameObject acceptPanel;
 	public GameObject photoButton;
-	public GameObject framePanel;
-    public Button screenAcceptButton;
+    public GameObject nextButton;
+    public GameObject backButton;
+    public Toggle menuToggle;
+    public GameObject backgroundPhotoButton;
 
-	WebCamDevice frontCameraDevice;
+    public GameObject framePanel;
+    public GameObject menuPanel;
+    public GameObject newRecord;
+
+    WebCamDevice cameraDevice;
 
 	// Image rotation
 	Vector3 rotationVector = new Vector3(180f, 180f, 0f);
@@ -32,30 +38,37 @@ public class WebCamPhotoCamera : MonoBehaviour
 	Vector3 fixedScale = new Vector3(-1f, 1f, 1f);
 
 	private bool _isPhotoTaken;
+    private bool _isCameraReady;
     private byte[] _bytes;
 
-	void Start() 
-	{
-		if (WebCamTexture.devices.Length == 0)
-		{
-			Debug.Log("No devices cameras found");
-			return;
-		}
-		frontCameraDevice = WebCamTexture.devices[1];
-		//WebCamDevice backCameraDevice = WebCamTexture.devices[0];
+    void Start()
+    {
+        if (WebCamTexture.devices.Length == 0)
+        {
+            Debug.Log("No devices cameras found");
+            return;
+        }
+        try
+        {
+            cameraDevice = WebCamTexture.devices[1];
+        }
+        catch
+        {
+            cameraDevice = WebCamTexture.devices[0];
+        }
 
-		webCamTexture = new WebCamTexture(frontCameraDevice.name);
-		webCamTexture.filterMode = FilterMode.Trilinear;
-		//backCameraTexture = new WebCamTexture(backCameraDevice.name);
+        webCamTexture = new WebCamTexture(cameraDevice.name);
+        webCamTexture.filterMode = FilterMode.Trilinear;
+        //backCameraTexture = new WebCamTexture(backCameraDevice.name);
 
-		GetComponent<RawImage> ().texture = webCamTexture;
+        GetComponent<RawImage>().texture = webCamTexture;
 
-		webCamTexture.Play();
-		//GetComponent<RawImage> ().SetNativeSize ();
+        webCamTexture.Play();
+        //GetComponent<RawImage> ().SetNativeSize ();
 
-		annotationText.text = PlayerPrefs.GetString ("RecordAnnotation", "");
-	}
-		
+        annotationText.text = PlayerPrefs.GetString("RecordAnnotation", "");
+    }
+	
 
 	void Update()
 	{
@@ -65,25 +78,38 @@ public class WebCamPhotoCamera : MonoBehaviour
 				Debug.Log ("Still waiting another frame for correct info...");
 				return;
 			}
+            if (!_isCameraReady)
+            {
+                StartCoroutine("EnablePhotoTaking");
+            }
 
 			// Rotate image to show correct orientation 
 			rotationVector.z = -webCamTexture.videoRotationAngle;
 			GetComponent<RawImage> ().rectTransform.localEulerAngles = rotationVector;
 
 			// Set AspectRatioFitter's ratio
-			float videoRatio = 
-				(float)webCamTexture.width / (float)webCamTexture.height;
-			GetComponent<AspectRatioFitter> ().aspectRatio = videoRatio;
+			float videoRatio = (float)webCamTexture.width / (float)webCamTexture.height;
+            GetComponent<AspectRatioFitter> ().aspectRatio = videoRatio;
 
 			// Unflip if vertically flipped
 			GetComponent<RawImage> ().uvRect = 
 			webCamTexture.videoVerticallyMirrored ? fixedRect : defaultRect;
 
 			// Mirror front-facing camera's image horizontally to look more natural
-			imageParent.localScale = 
-			frontCameraDevice.isFrontFacing ? fixedScale : defaultScale;
+			imageParent.localScale = cameraDevice.isFrontFacing ? fixedScale : defaultScale;
 		}
 	}
+
+    private IEnumerator EnablePhotoTaking()
+    {
+        yield return new WaitForSeconds(2f);
+        _isCameraReady = true;
+        photoButton.GetComponent<Button>().interactable = true;
+        nextButton.GetComponent<Button>().interactable = true;
+        backButton.GetComponent<Button>().interactable = true;
+        backgroundPhotoButton.GetComponent<Button>().interactable = true;
+        menuToggle.interactable = true;
+    } 
 
     //public void TakePhoto()
     //{
@@ -95,18 +121,23 @@ public class WebCamPhotoCamera : MonoBehaviour
 
     public void TakePhoto()
     {
-    	StartCoroutine("TakeSnapshot");
+        if (!_isPhotoTaken && _isCameraReady)
+        {
+            StartCoroutine("TakeSnapshot");
+        }  	
     }
 
 
     private IEnumerator TakeSnapshot()
     { 
     	framePanel.SetActive (false);
+        newRecord.SetActive(false);
+        menuPanel.SetActive(false);
     	yield return new WaitForEndOfFrame();
 
-    	Texture2D tex = new Texture2D (Screen.width, Screen.height - 300, TextureFormat.RGB24, false);
+		Texture2D tex = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
 
-    	tex.ReadPixels(new Rect(0, 300, Screen.width, Screen.height - 300), 0, 0);
+    	tex.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
     	tex.Apply ();
         //Encode texture into PNG
     	_isPhotoTaken = true;
@@ -115,13 +146,15 @@ public class WebCamPhotoCamera : MonoBehaviour
     	_bytes = tex.EncodeToPNG();
     	Destroy(tex);
 
-    	acceptPanel.SetActive (true);
     	photoButton.SetActive (false);
-        screenAcceptButton.interactable = false;
-    	//GetComponent<RawImage> ().texture = tex;
+        menuPanel.SetActive(true);
+        //screenAcceptButton.interactable = false;
+        //GetComponent<RawImage> ().texture = tex;
+
+        AcceptPhoto();
     }
 
-    private void ExitScene()
+    public void ExitScene()
 	{
 		if(webCamTexture != null)
 			webCamTexture.Stop();
@@ -138,12 +171,15 @@ public class WebCamPhotoCamera : MonoBehaviour
 
     private void SavePhoto()
     {
-        string path = "/storage/emulated/0/DCIM/bubbles_gallery";
-        Directory.CreateDirectory(path);
-        File.WriteAllBytes(path + string.Format("/{0}.png", DateTime.Now.ToString("yyyyMMddHHmmss")), _bytes);
+        string _path = Application.persistentDataPath;
+        //const string _path = "/storage/emulated/0/DCIM/bubbles_gallery";
+        //string _path = "/Users/ligross/Projects/Unity/bubbles_gallery";
+
+        Directory.CreateDirectory(_path);
+        File.WriteAllBytes(_path + string.Format("/{0}.png", DateTime.Now.ToString("yyyyMMddHHmmss")), _bytes);
 
         //ачивка за первое фото
-        switch (Directory.GetFiles(path, "*.png").Length)
+        switch (Directory.GetFiles(_path, "*.png").Length)
         {
 		case 1:
 			GooglePlayActions.UnlockAchievement (GooglePlayActions.narcissistAchiev);
@@ -162,25 +198,5 @@ public class WebCamPhotoCamera : MonoBehaviour
         SavePhoto();
 		ExitScene();
 	}
-
-    //public void AcceptPhoto()
-    //{
-    //    NPBinding.MediaLibrary.SaveScreenshotToGallery(SaveImageToGalleryFinished);
-    //    ExitScene();
-    //}
-
-    //private void SaveImageToGalleryFinished(bool _saved)
-    //{
-    //    Debug.Log("Saved image to gallery successfully ? " + _saved);
-    //}
-
-    public void DeclinePhoto(){
-		webCamTexture.Play ();
-		_isPhotoTaken = false;
-		framePanel.SetActive (true);
-		photoButton.SetActive (true);
-		acceptPanel.SetActive (false);
-        screenAcceptButton.interactable = true;
-    }
 		
 }

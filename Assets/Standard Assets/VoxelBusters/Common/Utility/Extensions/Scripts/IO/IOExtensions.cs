@@ -190,6 +190,17 @@ namespace VoxelBusters.Utility
 		}
 #endif
 
+		public static int ComparePath(string pathA, string pathB)
+		{
+			#if !IO_UNSUPPORTED_PLATFORM
+			return string.Compare(Path.GetFullPath(pathA).TrimEnd('\\'),
+			                      Path.GetFullPath(pathB).TrimEnd('\\'), 
+			                      true);
+			#else
+			return -1;
+			#endif
+		}
+
 		#endregion
 	}
 }

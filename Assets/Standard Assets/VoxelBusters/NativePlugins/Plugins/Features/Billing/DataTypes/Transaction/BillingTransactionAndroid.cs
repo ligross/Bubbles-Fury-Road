@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using VoxelBusters.Utility;
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins.Internal
 {
@@ -108,7 +108,7 @@ namespace VoxelBusters.NativePlugins.Internal
 			}
 			else
 			{
-				Console.LogError(Constants.kDebugTag, "[BillingTransaction] Invalid state " + _validationState);
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[BillingTransaction] Invalid state " + _validationState);
 				_state	= eBillingTransactionVerificationState.FAILED;
 			}
 			
@@ -136,7 +136,7 @@ namespace VoxelBusters.NativePlugins.Internal
 			}
 			else
 			{
-				Console.LogError(Constants.kDebugTag, "[BillingTransaction] Invalid state " + _state);
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[BillingTransaction] Invalid state " + _state);
 				_validationState	= kValidationFailed;
 			}
 			
@@ -202,7 +202,7 @@ namespace VoxelBusters.NativePlugins.Internal
 			base.OnCustomVerificationFinished(_newState);
 
 			// Nothing to do here. Not supporting external validation for android. //TODO - This needs original payload to verify
-			Console.Log(Constants.kDebugTag, "[Billing] On Android, all the transactions are validated implicitely, so this call has no effect.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Billing] On Android, all the transactions are validated implicitely, so this call has no effect.");
 		}
 
 		#endregion

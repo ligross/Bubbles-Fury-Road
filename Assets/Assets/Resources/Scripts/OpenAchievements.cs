@@ -1,11 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SocialPlatforms;
+﻿using UnityEngine;
 
 public class OpenAchievements : MonoBehaviour {
+    public DoozyUI.UIElement notificationBackground;
+    public DoozyUI.UIElement notificationBody;
 
-	public void OnClick(){
-		Social.ShowAchievementsUI ();
+    public void OnClick(){
+        if (Social.localUser.authenticated)
+        {
+            Social.ShowAchievementsUI();
+        }
+		else
+        {
+            notificationBackground.Show(false);
+            notificationBody.Show(false);
+            Debug.Log("Cannot show achievements: not authenticated");
+        }
 	}
 }

@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+﻿#if USES_BILLING
+using UnityEngine;
 using System.Collections;
-
-#if USES_BILLING
 using System.Collections.Generic;
 using VoxelBusters.Utility;
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -207,8 +206,8 @@ namespace VoxelBusters.NativePlugins
 		
 		protected void DidReceiveBillingProducts (BillingProduct[] _storeProducts, string _error)
 		{
-			Console.Log(Constants.kDebugTag, "[Billing] Request for billing products finished successfully.");
-			
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Billing] Request for billing products finished successfully.");
+
 			// Cache information
 			m_storeProducts	= _storeProducts;
 
@@ -248,7 +247,7 @@ namespace VoxelBusters.NativePlugins
 
 		protected void DidFinishProductPurchase (BillingTransaction[] _transactions, string _error)
 		{
-			Console.Log(Constants.kDebugTag, "[Billing] Received product purchase information.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Billing] Received product purchase information.");
 
 			// Send event
 			if (DidFinishProductPurchaseEvent != null)
@@ -284,7 +283,7 @@ namespace VoxelBusters.NativePlugins
 
 		protected void DidFinishRestoringPurchases (BillingTransaction[] _transactions, string _error)
 		{
-			Console.Log(Constants.kDebugTag, "[Billing] Received restored purchases information.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Billing] Received restored purchases information.");
 
 			// Send event
 			if (DidFinishRestoringPurchasesEvent != null)

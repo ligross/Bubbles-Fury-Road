@@ -8,7 +8,7 @@ public enum BonusType {Fast, Slow, Free, Score, Carma, Ghost, Fire, Poison};
 public class Bonus
 {
 	private BonusType _name;
-	private float _duration;
+	private int _duration;
 	private float _multiplier;
 	private float _startTime;
 

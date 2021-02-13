@@ -1,10 +1,9 @@
+#if USES_BILLING && UNITY_ANDROID
 using UnityEngine;
 using System.Collections;
-
-#if USES_BILLING && UNITY_ANDROID
 using System.Collections.Generic;
 using VoxelBusters.Utility;
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -32,7 +31,7 @@ namespace VoxelBusters.NativePlugins
 
 			if(string.IsNullOrEmpty(_publicKey))
 			{
-				Console.LogError(Constants.kDebugTag, "[Billing] Please specify public key in the configuration to proceed");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[Billing] Please specify public key in the configuration to proceed");
 				_publicKey = "";
 			}
 
@@ -92,7 +91,7 @@ namespace VoxelBusters.NativePlugins
 			if (!string.IsNullOrEmpty(_productID))
 				_isPurchased	= Plugin.Call<bool>(Native.Methods.IS_PRODUCT_PURCHASED,_productID);
 
-			Console.Log(Constants.kDebugTag, string.Format("[Billing] Product= {0} IsPurchased= {1}.", _productID, _isPurchased));
+			DebugUtility.Logger.Log(Constants.kDebugTag, string.Format("[Billing] Product= {0} IsPurchased= {1}.", _productID, _isPurchased));
 
 			return _isPurchased;
 		}

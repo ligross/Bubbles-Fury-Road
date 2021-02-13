@@ -1,9 +1,8 @@
-﻿using UnityEngine;
+﻿#if USES_TWITTER
+using UnityEngine;
 using System.Collections;
-
-#if USES_TWITTER
 using VoxelBusters.Utility;
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -43,7 +42,7 @@ namespace VoxelBusters.NativePlugins
 			
 			if (string.IsNullOrEmpty(_twitterSettings.ConsumerKey) || string.IsNullOrEmpty(_twitterSettings.ConsumerSecret))
 			{
-				Console.LogError(Constants.kDebugTag, "[Twitter] Twitter initialize failed. Please configure Consumer Key and Consumer Secret in NPSettings.");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[Twitter] Twitter initialize failed. Please configure Consumer Key and Consumer Secret in NPSettings.");
 				m_isInitialised = false;
 			}
 			else
@@ -133,7 +132,7 @@ namespace VoxelBusters.NativePlugins
 		public virtual bool IsLoggedIn ()
 		{
 			bool _isLoggedIn	= false;
-			Console.Log(Constants.kDebugTag, "[Twitter] IsLoggedIn=" + _isLoggedIn);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] IsLoggedIn=" + _isLoggedIn);
 			
 			return _isLoggedIn;
 		}
@@ -209,7 +208,7 @@ namespace VoxelBusters.NativePlugins
 			}
 			else
 			{
-				Console.LogWarning(Constants.kDebugTag, "[Twitter] Showing tweet composer with message only, texure is null");
+				DebugUtility.Logger.LogWarning(Constants.kDebugTag, "[Twitter] Showing tweet composer with message only, texure is null");
 			}
 
 			// Show tweet composer
@@ -226,7 +225,7 @@ namespace VoxelBusters.NativePlugins
 		{
 			if (string.IsNullOrEmpty(_URL))
 			{
-				Console.LogWarning(Constants.kDebugTag, "[Twitter] Showing tweet composer with message only, URL is null/empty");
+				DebugUtility.Logger.LogWarning(Constants.kDebugTag, "[Twitter] Showing tweet composer with message only, URL is null/empty");
 			}
 
 			// Show tweet composer

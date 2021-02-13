@@ -34,6 +34,7 @@ public static class GooglePlayActions {
 	public const string advancedAdsAchiev = "CgkIqe6wvP0aEAIQGw";
     public const string superAdvancedAdsAchiev = "CgkIqe6wvP0aEAIQHA";
     public const string mindBlowingAdsAchiev = "CgkIqe6wvP0aEAIQHQ";
+    public const string vangaCookiesAchiev = "CgkIqe6wvP0aEAIQHg";
     // Leaderboards
     public static string scoreLeaderboardId = "CgkIqe6wvP0aEAIQAQ"; 
 	public static string timeLeaderboardId = "CgkIqe6wvP0aEAIQAg";

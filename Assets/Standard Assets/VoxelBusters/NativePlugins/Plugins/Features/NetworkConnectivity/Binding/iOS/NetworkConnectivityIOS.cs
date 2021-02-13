@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿#if USES_NETWORK_CONNECTIVITY && UNITY_IOS
+using UnityEngine;
 using System.Collections;
-
-#if USES_NETWORK_CONNECTIVITY && UNITY_IOS
 using System.Runtime.InteropServices;
 
 namespace VoxelBusters.NativePlugins

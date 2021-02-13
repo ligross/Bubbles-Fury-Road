@@ -66,7 +66,10 @@ namespace VoxelBusters.NativePlugins
 		#region Constructors
 
 		public AchievementMetadata ()
-		{}
+		{
+			// Default steps for instant achievement (non-progressive/non-incremental achievement)
+			m_noOfSteps			= 1;
+		}
 
 		#endregion
 
@@ -76,7 +79,6 @@ namespace VoxelBusters.NativePlugins
 		{
 			AchievementMetadata _newObject	= new AchievementMetadata();
 
-			_newObject.m_noOfSteps			= 1;
 			_newObject.m_globalID			= _container.GlobalID;
 			_newObject.m_platformIDs		= _container.PlatformIDs;
 

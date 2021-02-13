@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins.Internal
 {
@@ -11,30 +12,22 @@ namespace VoxelBusters.NativePlugins.Internal
 		
 		public void Create (string _tag, Rect _frame)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void Destroy (string _tag)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void Show (string _tag)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void Hide (string _tag)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		#endregion
@@ -43,44 +36,32 @@ namespace VoxelBusters.NativePlugins.Internal
 		
 		public void LoadRequest (string _tag, string _URL)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif		
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void LoadHTMLString (string _tag, string _HTMLString, string _baseURL)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif		
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void LoadData (string _tag, byte[] _byteArray, string _MIMEType, string _textEncodingName, string _baseURL)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif		
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void EvaluateJavaScriptFromString (string _tag, string _javaScript)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif		
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void Reload (string _tag)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif		
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void StopLoading (string _tag)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		#endregion
@@ -89,58 +70,42 @@ namespace VoxelBusters.NativePlugins.Internal
 		
 		public void SetCanHide (string _tag, bool _canHide)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void SetCanBounce (string _tag, bool _canBounce)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void SetControlType (string _tag, eWebviewControlType _type)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void SetShowSpinnerOnLoad (string _tag, bool _showSpinner)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void SetAutoShowOnLoadFinish (string _tag, bool _autoShow)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void SetScalesPageToFit (string _tag, bool _scaleToFit)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void SetFrame (string _tag, Rect _frame)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		public void SetBackgroundColor (string _tag, Color _color)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		#endregion
@@ -149,9 +114,7 @@ namespace VoxelBusters.NativePlugins.Internal
 
 		public void AddNewURLSchemeName (string _tag, string _newURLSchemeName)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		#endregion
@@ -160,9 +123,7 @@ namespace VoxelBusters.NativePlugins.Internal
 		
 		public void ClearCache ()
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kNotSupportedInEditor);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 		}
 		
 		#endregion

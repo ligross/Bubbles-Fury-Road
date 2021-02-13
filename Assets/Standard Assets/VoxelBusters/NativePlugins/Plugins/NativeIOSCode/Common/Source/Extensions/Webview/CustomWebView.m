@@ -100,7 +100,15 @@ static NSString *const kMoPubScalesPageToFitScript = @"var meta = document.creat
 {
     // create configuration object
     WKWebViewConfiguration *webConfig   = [[[WKWebViewConfiguration alloc] init] autorelease];
-    [webConfig setMediaTypesRequiringUserActionForPlayback:WKAudiovisualMediaTypeAll];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0"))
+    {
+        [webConfig setMediaTypesRequiringUserActionForPlayback:WKAudiovisualMediaTypeAll];
+    }
+    else
+    {
+        [webConfig setMediaPlaybackRequiresUserAction:WKAudiovisualMediaTypeAll];
+    }
+    
     [webConfig setAllowsInlineMediaPlayback:YES];
 
     // setup webview

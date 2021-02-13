@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using VoxelBusters.UASUtils;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -14,9 +15,7 @@ namespace VoxelBusters.NativePlugins.Internal
 		public void OpenStoreLink (string _applicationID)
 		{
 #if UNITY_EDITOR
-#if NP_DEBUG
-			Debug.Log("[Utility] Opening store, ApplicationID=" + _applicationID);
-#endif
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Utility] Opening store, ApplicationID=" + _applicationID);
 
 			if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
 			{
@@ -37,9 +36,17 @@ namespace VoxelBusters.NativePlugins.Internal
 		
 		public void SetApplicationIconBadgeNumber (int _badgeNumber)
 		{
-#if NP_DEBUG
-			Debug.LogWarning(Constants.kiOSFeature);
-#endif
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kiOSFeature);
+		}
+
+		public RateMyApp CreateRateMyApp(RateMyAppSettings _settings)
+		{
+			RateMyAppGenericController _controller = new RateMyAppGenericController();
+			return RateMyApp.Create(_viewController: _controller,
+			                        _keysCollection: _controller,
+			                        _eventResponder: _controller,
+			                        _operationHandler: _controller,
+			                        _settings: _settings);
 		}
 
 		#endregion

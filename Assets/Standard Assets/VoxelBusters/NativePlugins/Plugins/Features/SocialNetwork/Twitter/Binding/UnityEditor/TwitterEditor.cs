@@ -1,8 +1,7 @@
-﻿using UnityEngine;
+﻿#if USES_TWITTER && UNITY_EDITOR
+using UnityEngine;
 using System.Collections;
-
-#if USES_TWITTER && UNITY_EDITOR
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -33,13 +32,13 @@ namespace VoxelBusters.NativePlugins
 		public override void Logout ()
 		{
 			base.Logout();
-			Console.LogError(Constants.kDebugTag, Constants.kNotSupportedInEditor);
+			DebugUtility.Logger.LogError(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 			TwitterLogoutFinished();
 		}
 		
 		public override bool IsLoggedIn ()
 		{
-			Console.LogError(Constants.kDebugTag, Constants.kNotSupportedInEditor);
+			DebugUtility.Logger.LogError(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 			return base.IsLoggedIn();
 		}
 
@@ -51,7 +50,7 @@ namespace VoxelBusters.NativePlugins
 		{
 			base.ShowTweetComposer(_message, _URL, _imgByteArray, _onCompletion);
 
-			Console.LogError(Constants.kDebugTag, Constants.kNotSupportedInEditor);
+			DebugUtility.Logger.LogError(Constants.kDebugTag, Constants.kNotSupportedInEditor);
 
 			TweetComposerDismissed(((int)eTwitterComposerResult.CANCELLED).ToString());
 		}

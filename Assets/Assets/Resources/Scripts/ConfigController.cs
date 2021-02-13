@@ -17,8 +17,8 @@ public class ConfigController : MonoBehaviour {
 
     public AudioSource musicSource;
 
-    private bool _isMusicOff;
-    private bool _isSoundOff;
+    public bool _isMusicOff;
+    public bool _isSoundOff;
 
     private void Start()
     {
@@ -27,11 +27,13 @@ public class ConfigController : MonoBehaviour {
             _isMusicOff = bool.Parse(PlayerPrefs.GetString("isMusicOff"));
             if (_isMusicOff)
             {
-                musicSource.Stop();
+                if (musicSource != null)
+                    musicSource.Stop();
             }
             else
-            {
-                musicSource.Play();
+            {   
+                if (musicSource != null && !musicSource.isPlaying)
+                    musicSource.Play();
             }
             musicOffImage.gameObject.SetActive(_isMusicOff);
         }
@@ -60,10 +62,12 @@ public class ConfigController : MonoBehaviour {
         PlayerPrefs.SetString("isMusicOff", _isMusicOff == true ? bool.TrueString : bool.FalseString);
         if (_isMusicOff)
         {
+            if (musicSource != null)
             musicSource.Stop();
         }
         else
         {
+            if (musicSource != null)
             musicSource.Play();
         }
     }

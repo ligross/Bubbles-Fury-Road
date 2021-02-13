@@ -1,7 +1,8 @@
 // Copyright 2014 Google Inc. All Rights Reserved.
 
-@import Foundation;
-@import GoogleMobileAds;
+#import <Foundation/Foundation.h>
+
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 #import "GADUTypes.h"
 
@@ -9,7 +10,7 @@
 
 /// Initializes a GADURewardBasedVideoAd.
 - (instancetype)initWithRewardBasedVideoClientReference:
-        (GADUTypeRewardBasedVideoAdClientRef *)rewardBasedVideoAdClient;
+    (GADUTypeRewardBasedVideoAdClientRef *)rewardBasedVideoAdClient;
 
 /// The reward based video ad.
 @property(nonatomic, strong) GADRewardBasedVideoAd *rewardBasedVideo;
@@ -39,6 +40,9 @@
 /// The will leave application callback into Unity.
 @property(nonatomic, assign) GADURewardBasedVideoAdWillLeaveApplicationCallback willLeaveCallback;
 
+// Returns the mediation adapter class name.
+@property(nonatomic, readonly, copy) NSString *mediationAdapterClassName;
+
 /// Makes an ad request. Additional targeting options can be supplied with a request object.
 - (void)loadRequest:(GADRequest *)request withAdUnitID:(NSString *)adUnitID;
 
@@ -47,5 +51,8 @@
 
 /// Shows the reward based video ad.
 - (void)show;
+
+// Sets the user ID to be used in server-to-server reward callbacks.
+- (void)setUserId:(NSString *)userId;
 
 @end

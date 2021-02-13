@@ -141,6 +141,19 @@ namespace VoxelBusters.Utility
 			_xmlWriter.WriteEndElement();
 		}
 
+		protected void WriteService (XmlWriter _xmlWriter, string _name, string _permission, string _comment = null)
+		{
+			if (_comment != null)
+				_xmlWriter.WriteComment(_comment);
+
+			_xmlWriter.WriteStartElement("service");
+			{
+				WriteAttributeString(_xmlWriter, "android", "name", null, _name);
+				WriteAttributeString(_xmlWriter, "android", "permission", null, _permission);
+			}
+			_xmlWriter.WriteEndElement();
+		}
+
 		protected void WritePermission (XmlWriter _xmlWriter, string _name, string _protectionLevel, string _comment = null)
 		{
 			if (_comment != null)

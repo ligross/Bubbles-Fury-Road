@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+﻿#if USES_TWITTER && UNITY_IOS
+using UnityEngine;
 using System.Collections;
-
-#if USES_TWITTER && UNITY_IOS
 using System.Runtime.InteropServices;
 using VoxelBusters.Utility;
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -72,7 +71,7 @@ namespace VoxelBusters.NativePlugins
 			}
 			else
 			{
-				Console.LogError(Constants.kDebugTag, "Twitter is not yet initialised! Call Initialise method first.");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "Twitter is not yet initialised! Call Initialise method first.");
 			}
 		}
 		
@@ -80,7 +79,7 @@ namespace VoxelBusters.NativePlugins
 		{
 			if (!IsLoggedIn())
 			{
-				Console.LogWarning(Constants.kDebugTag, "Already logged out.");
+				DebugUtility.Logger.LogWarning(Constants.kDebugTag, "Already logged out.");
 				return;
 			}
 			
@@ -93,7 +92,7 @@ namespace VoxelBusters.NativePlugins
 		public override bool IsLoggedIn ()
 		{
 			bool _isLoggedIn	= cpnpTwitterIsUserLoggedIn(m_activeSessionUserID);
-			Console.Log(Constants.kDebugTag, "[Twitter] IsLoggedIn=" + _isLoggedIn);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] IsLoggedIn=" + _isLoggedIn);
 			
 			return _isLoggedIn;
 		}

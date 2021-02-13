@@ -12,10 +12,8 @@ namespace VoxelBusters.NativePlugins
 		[SerializeField]
 		[Tooltip("Rate My App dialog settings.")]
 		private 	RateMyAppSettings		m_rateMyApp;
-
 		[SerializeField]
 		private 	AndroidSettings			m_android;
-
 
 		#endregion
 

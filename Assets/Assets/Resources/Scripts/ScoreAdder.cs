@@ -13,7 +13,7 @@ public class ScoreAdder : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        gameObject.transform.Translate(new Vector3(0, 5, 0) * Time.deltaTime);
+        gameObject.transform.Translate(new Vector3(0, 7, 0) * Time.deltaTime);
         GetComponent<Text>().CrossFadeAlpha(0, 0.7f, false);
     }
 

@@ -10,6 +10,8 @@ namespace VoxelBusters.NativePlugins.Internal
 		void OpenStoreLink (string _applicationID);
 		void SetApplicationIconBadgeNumber (int _badgeNumber);
 
+		RateMyApp CreateRateMyApp(RateMyAppSettings _settings);
+
 		#endregion
 	}
 }

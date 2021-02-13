@@ -28,7 +28,7 @@ namespace VoxelBusters.NativePlugins.Internal
 		private void Awake ()
 		{
 			// Set properties
-			Platform	= CreatePlatformSpecificObject();
+			Platform	= CreateNativeBindingObject();
 		}
 
 		#endregion
@@ -46,7 +46,7 @@ namespace VoxelBusters.NativePlugins.Internal
 		
 		#region Private Methods
 
-		private IWebViewPlatform CreatePlatformSpecificObject ()
+		private IWebViewPlatform CreateNativeBindingObject ()
 		{
 #if UNITY_EDITOR
 			return new WebViewNativeUnsupported();

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using VBUtils = VoxelBusters.Utility;
+using VoxelBusters.UASUtils;
+
+using PlayerSettings = VoxelBusters.Utility.PlayerSettings;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -40,12 +42,10 @@ namespace VoxelBusters.NativePlugins
 			// Set properties
 			m_platform	= CreatePlatformSpecificObject();
 
-			if (NPSettings.Utility.RateMyApp.IsEnabled)
+			RateMyAppSettings _settings = NPSettings.Utility.RateMyApp;
+			if (_settings.IsEnabled)
 			{
-				RateMyApp	= new RateMyApp(
-					_settings: NPSettings.Utility.RateMyApp,
-					_controller: new RateStoreAppController()
-				);
+				RateMyApp	= m_platform.CreateRateMyApp(_settings);
 				RateMyApp.RecordAppLaunch();
 			}
 		}
@@ -114,9 +114,7 @@ namespace VoxelBusters.NativePlugins
 			PlatformValue _storeIdentifier	= PlatformValueHelper.GetCurrentPlatformValue(_array: _storeIdentifiers);
 			if (_storeIdentifier == null)
 			{
-#if NP_DEBUG
-				Debug.Log("[Utility] The operation could not be completed because application identifier is invalid.");
-#endif
+				DebugUtility.Logger.Log(Constants.kDebugTag, "[Utility] The operation could not be completed because application identifier is invalid.");
 				return;
 			}
 			
@@ -154,7 +152,7 @@ namespace VoxelBusters.NativePlugins
 		/// <returns>The bundle version.</returns>
 		public string GetBundleVersion ()
 		{
-			return VBUtils.PlayerSettings.GetBundleVersion();
+			return PlayerSettings.GetBundleVersion();
 		}
 
 		/// <summary>
@@ -163,7 +161,7 @@ namespace VoxelBusters.NativePlugins
 		/// <returns>The bundle identifier.</returns>
 		public string GetBundleIdentifier ()
 		{
-			return VBUtils.PlayerSettings.GetBundleIdentifier();
+			return PlayerSettings.GetBundleIdentifier();
 		}
 
 		#endregion

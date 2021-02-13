@@ -24,35 +24,36 @@
 
 public static class GPGSIds
 {
-        public const string achievement_superhuman = "CgkIqe6wvP0aEAIQBg"; // <GPGSID>
-        public const string achievement_the_pioneer = "CgkIqe6wvP0aEAIQAw"; // <GPGSID>
-        public const string achievement_photogenic_discordant = "CgkIqe6wvP0aEAIQFw"; // <GPGSID>
-        public const string achievement_destrudo = "CgkIqe6wvP0aEAIQFA"; // <GPGSID>
-        public const string achievement_to_the_glory_of_the_great_tetraktis = "CgkIqe6wvP0aEAIQGA"; // <GPGSID>
-        public const string achievement_long_live_the_king = "CgkIqe6wvP0aEAIQDA"; // <GPGSID>
-        public const string achievement_fly_on_the_wall = "CgkIqe6wvP0aEAIQEw"; // <GPGSID>
-        public const string achievement_mindblowing_advertising_overseer = "CgkIqe6wvP0aEAIQHQ"; // <GPGSID>
-        public const string achievement_beginner_advertising_overseer = "CgkIqe6wvP0aEAIQGQ"; // <GPGSID>
-        public const string leaderboard_greedy_leaderboard = "CgkIqe6wvP0aEAIQAQ"; // <GPGSID>
-        public const string achievement_intermediate_advertising_overseer = "CgkIqe6wvP0aEAIQGg"; // <GPGSID>
-        public const string leaderboard_meditative_leaderboard = "CgkIqe6wvP0aEAIQAg"; // <GPGSID>
-        public const string achievement_street_magician = "CgkIqe6wvP0aEAIQFg"; // <GPGSID>
-        public const string achievement_trickster = "CgkIqe6wvP0aEAIQBw"; // <GPGSID>
-        public const string achievement_climber = "CgkIqe6wvP0aEAIQCQ"; // <GPGSID>
-        public const string achievement_so_with_what_shall_i_scrap_this = "CgkIqe6wvP0aEAIQCw"; // <GPGSID>
-        public const string achievement_it_was_so_lovely = "CgkIqe6wvP0aEAIQCg"; // <GPGSID>
-        public const string achievement_super_advanced_advertising_overseer = "CgkIqe6wvP0aEAIQHA"; // <GPGSID>
-        public const string achievement_fly_baron = "CgkIqe6wvP0aEAIQEg"; // <GPGSID>
-        public const string achievement_advanced_advertising_overseer = "CgkIqe6wvP0aEAIQGw"; // <GPGSID>
-        public const string achievement_good_pupil = "CgkIqe6wvP0aEAIQCA"; // <GPGSID>
-        public const string achievement_a_bit_not_enough = "CgkIqe6wvP0aEAIQDw"; // <GPGSID>
-        public const string achievement_my_little_narcissist = "CgkIqe6wvP0aEAIQDQ"; // <GPGSID>
-        public const string achievement_a_pretty_good_too = "CgkIqe6wvP0aEAIQEA"; // <GPGSID>
-        public const string achievement_look_at_me_im_doin_something = "CgkIqe6wvP0aEAIQDg"; // <GPGSID>
-        public const string leaderboard_fighter_of_evil_leaderboard = "CgkIqe6wvP0aEAIQEQ"; // <GPGSID>
         public const string achievement_lord_of_the_flies = "CgkIqe6wvP0aEAIQBA"; // <GPGSID>
-        public const string achievement_mr_apathy = "CgkIqe6wvP0aEAIQFQ"; // <GPGSID>
+        public const string achievement_a_pretty_good_too = "CgkIqe6wvP0aEAIQEA"; // <GPGSID>
+        public const string achievement_shall_i_scrape_this_off = "CgkIqe6wvP0aEAIQCw"; // <GPGSID>
+        public const string achievement_destrudo = "CgkIqe6wvP0aEAIQFA"; // <GPGSID>
+        public const string achievement_it_was_so_lovely = "CgkIqe6wvP0aEAIQCg"; // <GPGSID>
+        public const string achievement_photogenic_discordant = "CgkIqe6wvP0aEAIQFw"; // <GPGSID>
+        public const string achievement_advanced_ads_viewer = "CgkIqe6wvP0aEAIQGw"; // <GPGSID>
+        public const string leaderboard_greedy_leaderboard = "CgkIqe6wvP0aEAIQAQ"; // <GPGSID>
         public const string achievement_fly_swat = "CgkIqe6wvP0aEAIQBQ"; // <GPGSID>
+        public const string achievement_super_advanced_ads_viewer = "CgkIqe6wvP0aEAIQHA"; // <GPGSID>
+        public const string achievement_mr_apathy = "CgkIqe6wvP0aEAIQFQ"; // <GPGSID>
+        public const string achievement_trickster = "CgkIqe6wvP0aEAIQBw"; // <GPGSID>
+        public const string achievement_the_pioneer = "CgkIqe6wvP0aEAIQAw"; // <GPGSID>
+        public const string leaderboard_fighter_against_evil_leaderboard = "CgkIqe6wvP0aEAIQEQ"; // <GPGSID>
+        public const string achievement_intermediate_ads_viewer = "CgkIqe6wvP0aEAIQGg"; // <GPGSID>
+        public const string achievement_long_live_the_king = "CgkIqe6wvP0aEAIQDA"; // <GPGSID>
+        public const string achievement_good_pupil = "CgkIqe6wvP0aEAIQCA"; // <GPGSID>
+        public const string leaderboard_meditative_leaderboard = "CgkIqe6wvP0aEAIQAg"; // <GPGSID>
+        public const string achievement_a_little_bit_not_enough = "CgkIqe6wvP0aEAIQDw"; // <GPGSID>
+        public const string achievement_superhuman = "CgkIqe6wvP0aEAIQBg"; // <GPGSID>
+        public const string achievement_fly_baron = "CgkIqe6wvP0aEAIQEg"; // <GPGSID>
+        public const string achievement_climber = "CgkIqe6wvP0aEAIQCQ"; // <GPGSID>
+        public const string achievement_vangacookies = "CgkIqe6wvP0aEAIQHg"; // <GPGSID>
+        public const string achievement_mom_look_how_i_can = "CgkIqe6wvP0aEAIQDg"; // <GPGSID>
+        public const string achievement_street_magician = "CgkIqe6wvP0aEAIQFg"; // <GPGSID>
+        public const string achievement_the_great_tetraktis = "CgkIqe6wvP0aEAIQGA"; // <GPGSID>
+        public const string achievement_beginner_ads_viewer = "CgkIqe6wvP0aEAIQGQ"; // <GPGSID>
+        public const string achievement_mindblowing_ads_viewer = "CgkIqe6wvP0aEAIQHQ"; // <GPGSID>
+        public const string achievement_fly_on_the_wall = "CgkIqe6wvP0aEAIQEw"; // <GPGSID>
+        public const string achievement_my_little_narcissist = "CgkIqe6wvP0aEAIQDQ"; // <GPGSID>
 
 }
 

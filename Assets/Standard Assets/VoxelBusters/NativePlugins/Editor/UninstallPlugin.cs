@@ -41,7 +41,7 @@ namespace VoxelBusters.NativePlugins.Internal
 			{
 				foreach (string _eachFolder in kPluginFolders)
 				{
-					string _absolutePath = AssetsUtility.AssetPathToAbsolutePath(_eachFolder);
+					string _absolutePath = AssetDatabaseUtils.AssetPathToAbsolutePath(_eachFolder);
 
 					if (Directory.Exists(_absolutePath))
 					{

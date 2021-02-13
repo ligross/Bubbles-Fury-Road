@@ -78,8 +78,8 @@ namespace VoxelBusters.NativePlugins
 		public BillingSettings ()
 		{
 			Products	= new BillingProduct[0];
-			iOS			= new BillingSettings.iOSSettings();
-			Android		= new BillingSettings.AndroidSettings();
+			iOS			= new iOSSettings();
+			Android		= new AndroidSettings();
 		}
 
 		#endregion

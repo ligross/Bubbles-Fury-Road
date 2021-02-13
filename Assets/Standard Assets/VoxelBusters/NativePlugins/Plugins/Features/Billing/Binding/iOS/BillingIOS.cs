@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+﻿#if USES_BILLING && UNITY_IOS
+using UnityEngine;
 using System.Collections;
-
-#if USES_BILLING && UNITY_IOS
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using VoxelBusters.Utility;
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -89,7 +88,7 @@ namespace VoxelBusters.NativePlugins
 			if (!string.IsNullOrEmpty(_productID))
 				_isPurchased	= cpnpBillingIsProductPurchased(_productID);
 
-			Console.Log(Constants.kDebugTag, string.Format("[Billing] Product= {0} IsPurchased= {1}.", _productID, _isPurchased));
+			DebugUtility.Logger.Log(Constants.kDebugTag, string.Format("[Billing] Product= {0} IsPurchased= {1}.", _productID, _isPurchased));
 
 			return _isPurchased;
 		}

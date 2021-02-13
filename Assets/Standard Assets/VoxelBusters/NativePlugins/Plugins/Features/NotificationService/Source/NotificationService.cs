@@ -55,6 +55,7 @@ namespace VoxelBusters.NativePlugins
 
 			OneSignal.StartInit(appID: _settings.AppID, googleProjectNumber: _settings.GoogleProjectNumber)
 					.HandleNotificationReceived(DidReceiveOneSignalNotification)
+					.HandleNotificationOpened(DidReceiveOneSignalLaunchNotification)
 					.InFocusDisplaying(OneSignal.OSInFocusDisplayOption.None)
 					.Settings(new Dictionary<string, bool>(){
 						{ OneSignal.kOSSettingsAutoPrompt, false } })
@@ -165,6 +166,11 @@ namespace VoxelBusters.NativePlugins
 
 				OneSignal.RegisterForPushNotifications();
 				OneSignal.SetSubscription(true);
+
+#if NP_DEBUG
+				Debug.Log("[NotificationService] One Signal Library don't give access to device token. It handles internally and passes to its server.");
+#endif				
+				DidRegisterRemoteNotification(null);
 			}
 #endif
 		}

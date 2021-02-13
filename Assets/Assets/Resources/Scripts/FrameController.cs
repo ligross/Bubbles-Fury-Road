@@ -17,16 +17,17 @@ public class FrameController : MonoBehaviour {
 
 	void Start()
 	{
+        if (true)
+        {
+            GameObject frame = Instantiate(pinkFrame);
+            frame.transform.SetParent(this.transform, false);
+            frame.GetComponent<FramePicker>().framePlace = framePlace;
+        }
 		if (PlayerPrefs.GetInt ("KingFrame") == 1) {
 			GameObject frame = Instantiate (kingFrame);
 			frame.transform.SetParent (this.transform, false);
             frame.GetComponent<FramePicker>().framePlace = framePlace;
 
-        }
-		if (PlayerPrefs.GetInt ("PinkFrame") == 1) {
-			GameObject frame = Instantiate (pinkFrame);
-			frame.transform.SetParent (this.transform, false);
-            frame.GetComponent<FramePicker>().framePlace = framePlace;
         }
 		if (PlayerPrefs.GetInt ("MetallFrame") == 1) {
 			GameObject frame = Instantiate (metallFrame);
@@ -69,5 +70,26 @@ public class FrameController : MonoBehaviour {
             frame.transform.SetParent(this.transform, false);
             frame.GetComponent<FramePicker>().framePlace = framePlace;
         }
+
+        PopulateFakeFrames();
+    }
+
+    void PopulateFakeFrames()
+    {
+
+        if (true)
+        {
+            GameObject frame = Instantiate(kingFrame);
+            frame.transform.SetParent(this.transform, false);
+            frame.GetComponent<FramePicker>().framePlace = framePlace;
+
+        }
+        if (true)
+        {
+            GameObject frame = Instantiate(metallFrame);
+            frame.transform.SetParent(this.transform, false);
+            frame.GetComponent<FramePicker>().framePlace = framePlace;
+        }
+
     }
 }

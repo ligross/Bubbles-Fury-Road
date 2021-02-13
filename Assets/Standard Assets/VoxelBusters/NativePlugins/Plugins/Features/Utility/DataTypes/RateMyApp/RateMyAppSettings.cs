@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using VoxelBusters.Utility;
+using VoxelBusters.NativePlugins.Internal;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -10,6 +11,7 @@ namespace VoxelBusters.NativePlugins
 		#region Fields
 
 		[SerializeField]
+		[NotifyNPSettingsOnValueChange]
 		[Tooltip("If enabled, Rate My App feature will be active within your application.")]
 		private 	bool 		m_isEnabled						= false;
 		[SerializeField]

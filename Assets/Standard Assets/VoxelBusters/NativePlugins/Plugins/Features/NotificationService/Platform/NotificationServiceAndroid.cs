@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using VoxelBusters.Utility;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins.Internal
 {
@@ -104,9 +105,7 @@ namespace VoxelBusters.NativePlugins.Internal
 		{
 			if (_senderIDs.Length == 0)
 			{
-#if NP_DEBUG
-				Debug.LogError("Add senderid list for notifications to work");
-#endif
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "Add senderid list for notifications to work");
 			}
 
 			List<string> list =  new List<string>(_senderIDs);	

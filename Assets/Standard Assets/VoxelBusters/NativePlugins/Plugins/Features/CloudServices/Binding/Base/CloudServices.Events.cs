@@ -1,8 +1,7 @@
-﻿using UnityEngine;
+﻿#if USES_CLOUD_SERVICES
+using UnityEngine;
 using System.Collections;
-
-#if USES_CLOUD_SERVICES
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -146,7 +145,7 @@ namespace VoxelBusters.NativePlugins
 
 		protected virtual void CloudKeyValueStoreDidInitialise (bool _isSuccess)
 		{
-			Console.Log(Constants.kDebugTag, "[CloudServices] Received key store value Initialised event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[CloudServices] Received key store value Initialised event.");
 			
 			if (KeyValueStoreDidInitialiseEvent != null)
 				KeyValueStoreDidInitialiseEvent(_isSuccess);
@@ -162,7 +161,7 @@ namespace VoxelBusters.NativePlugins
 
 		protected void CloudKeyValueStoreDidSynchronise (bool _success)
 		{
-			Console.Log(Constants.kDebugTag, "[CloudServices] Received key store value synchronised event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[CloudServices] Received key store value synchronised event.");
 			
 			if (KeyValueStoreDidSynchroniseEvent != null)
 				KeyValueStoreDidSynchroniseEvent(_success);
@@ -173,7 +172,7 @@ namespace VoxelBusters.NativePlugins
 
 		protected void CloudKeyValueStoreDidChangeExternally (eCloudDataStoreValueChangeReason _reason, string[] _keys)
 		{
-			Console.Log(Constants.kDebugTag, "[CloudServices] Received key store value changed event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[CloudServices] Received key store value changed event.");
 			
 			if (KeyValueStoreDidChangeExternallyEvent != null)
 				KeyValueStoreDidChangeExternallyEvent(_reason, _keys);

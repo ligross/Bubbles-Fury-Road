@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PhotoPicker : MonoBehaviour {
 
-	public string name;
+	public int ind;
 	private PhotoPickerController controller;
 
 	void Start(){
-		controller = GameObject.Find ("PhotoPanel").GetComponent<PhotoPickerController>();
+		controller = GameObject.Find ("Canvas").GetComponent<PhotoPickerController>();
 	}
 
 	public void PickPhoto()
 	{
-		controller.PickPhoto (this.name);
+		controller.PickPhoto (ind);
 	}
 }

@@ -1,9 +1,8 @@
-﻿using UnityEngine;
+﻿#if UNITY_ANDROID && USES_ADDRESS_BOOK
+using UnityEngine;
 using System.Collections;
-using VoxelBusters.DebugPRO;
 using VoxelBusters.Utility;
 
-#if UNITY_ANDROID && USES_ADDRESS_BOOK
 namespace VoxelBusters.NativePlugins
 {
 	using Internal;

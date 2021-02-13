@@ -10,7 +10,10 @@
 
 @implementation SocialShare
 
-#define kSocialShareFinished 	"SocialShareFinished"
+#define kSocialShareFinished     "SocialShareFinished"
+
+static NSString *const kFacebookURLScheme   = @"fb://";
+static NSString *const kTwitterURLScheme    = @"twitter://";
 
 #pragma mark - Methods
 
@@ -30,14 +33,18 @@
 
 - (BOOL)isServiceTypeAvailable:(SocialShareServiceType)serviceType;
 {
-	NSString *serviceName	= [self getServiceName:serviceType];
-	
-	if (serviceName != NULL)
-	{
-		return [SLComposeViewController isAvailableForServiceType:serviceName];
-	}
-	
-	return false;
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11.0"))
+    {
+        return [self checkWhetherServiceIsAvailable:serviceType];
+    }
+    else
+    {
+        NSString *serviceName    = [self getServiceName:serviceType];
+        if (serviceName != NULL)
+            return [SLComposeViewController isAvailableForServiceType:serviceName];
+        
+        return false;
+    }
 }
 
 - (void)share:(SocialShareServiceType)serviceType
@@ -90,5 +97,26 @@
 	
 	NotifyEventListener(kSocialShareFinished, ToJsonCString(dataDict));
 }
+
+#pragma mark - Temporary methods
+
+- (BOOL)checkWhetherServiceIsAvailable:(SocialShareServiceType)serviceType
+{
+    switch (serviceType)
+    {
+        case SocialShareServiceTypeTwitter:
+            return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:kTwitterURLScheme]];
+            break;
+            
+        case SocialShareServiceTypeFacebook:
+            return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:kFacebookURLScheme]];
+            break;
+            
+        default:
+            break;
+    }
+    return false;
+}
+
 
 @end

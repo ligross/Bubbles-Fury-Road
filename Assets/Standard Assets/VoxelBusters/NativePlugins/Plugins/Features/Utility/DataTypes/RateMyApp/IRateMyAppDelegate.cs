@@ -8,7 +8,6 @@ namespace VoxelBusters.NativePlugins
 		#region Methods
 
 		bool CanShowRateMyAppDialog ();
-
 		void OnBeforeShowingRateMyAppDialog ();
 
 		#endregion

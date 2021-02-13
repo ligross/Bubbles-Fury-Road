@@ -17,12 +17,12 @@ namespace VoxelBusters.NativePlugins
 		[Tooltip("Select the features that you would like to use.")]
 		private		Features		m_supportedFeatures			= new Features();
 		[SerializeField]
+		[Tooltip("Select the Addon services that you would like to use.")]
+		private		AddonServices 	m_supportedAddonServices	= new AddonServices();
+		[SerializeField]
 		private		iOSSettings		m_iOS						= new iOSSettings();
 		[SerializeField]
 		private 	AndroidSettings	m_android					= new AndroidSettings();
-		[SerializeField]
-		[Tooltip("Select the Addon services that you would like to use.")]
-		private		AddonServices 	m_supportedAddonServices	= new AddonServices();
 
 		#endregion
 

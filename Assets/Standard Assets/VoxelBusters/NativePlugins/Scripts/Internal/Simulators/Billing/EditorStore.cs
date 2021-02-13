@@ -1,13 +1,11 @@
-﻿using UnityEngine;
+﻿#if USES_BILLING && UNITY_EDITOR
+using UnityEngine;
 using System.Collections;
-
-#if USES_BILLING && UNITY_EDITOR
 using UnityEditor;
 using System;
 using System.Collections.Generic;
 using VoxelBusters.Utility;
-using VoxelBusters.DebugPRO;
-using Console	= VoxelBusters.DebugPRO.Console;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins.Internal
 {
@@ -135,7 +133,7 @@ namespace VoxelBusters.NativePlugins.Internal
 			}
 			else
 			{
-				Console.LogWarning(Constants.kDebugTag, "[EditorStore] Native UI component is null");
+				DebugUtility.Logger.LogWarning(Constants.kDebugTag, "[EditorStore] Native UI component is null");
 				return;
 			}
 		}
@@ -146,7 +144,7 @@ namespace VoxelBusters.NativePlugins.Internal
 
 			if (registeredProducts == null)
 			{
-				Console.LogError(Constants.kDebugTag, "[EditorStore] Restore purchases can be done only after getting products information from store.");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[EditorStore] Restore purchases can be done only after getting products information from store.");
 				return;
 			}
 
@@ -243,7 +241,7 @@ namespace VoxelBusters.NativePlugins.Internal
 #if UNITY_ANDROID
 			if (string.IsNullOrEmpty(NPSettings.Billing.Android.PublicKey))
 			{
-				Console.LogError(Constants.kDebugTag, "[EditorStore] Please add public key in NPSettings for Billing to work on Android.");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[EditorStore] Please add public key in NPSettings for Billing to work on Android.");
 			}
 #endif
 		}

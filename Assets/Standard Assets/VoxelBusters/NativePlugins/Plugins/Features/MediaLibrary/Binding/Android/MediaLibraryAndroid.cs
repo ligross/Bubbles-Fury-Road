@@ -1,9 +1,8 @@
-﻿using UnityEngine;
+﻿#if USES_MEDIA_LIBRARY && UNITY_ANDROID
+using UnityEngine;
 using System.Collections;
-
-#if USES_MEDIA_LIBRARY && UNITY_ANDROID
 using VoxelBusters.Utility;
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -35,14 +34,14 @@ namespace VoxelBusters.NativePlugins
 		public override bool IsCameraSupported ()
 		{
 			bool _isSupported	= Plugin.Call<bool>(Native.Methods.IS_CAMERA_SUPPORTED);
-			Console.Log(Constants.kDebugTag, "[MediaLibrary] IsCameraSupported=" + _isSupported);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[MediaLibrary] IsCameraSupported=" + _isSupported);
 			
 			return _isSupported;
 		}
 		
 		public override void SetAllowsImageEditing (bool _value)
 		{
-			Console.LogWarning(Constants.kDebugTag, Constants.kiOSFeature);
+			DebugUtility.Logger.LogWarning(Constants.kDebugTag, Constants.kiOSFeature);
 		}
 		
 		public override void PickImage (eImageSource _source, 	float _scaleFactor, 	

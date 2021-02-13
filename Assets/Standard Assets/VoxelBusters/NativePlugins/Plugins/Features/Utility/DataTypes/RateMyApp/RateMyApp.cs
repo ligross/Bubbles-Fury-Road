@@ -15,8 +15,11 @@ namespace VoxelBusters.NativePlugins
 	{
 		#region Fields
 	
-		private 	RateMyAppSettings		m_rateMyAppSettings;
-		private		IRateMyAppController	m_controller;
+		private 	RateMyAppSettings			m_settings;
+		private		IRateMyAppViewController	m_viewController;
+		private		IRateMyAppKeysCollection	m_keysCollection;
+		private		IRateMyAppEventResponder	m_eventResponder;
+		private		IRateMyAppOperationHandler	m_operationHandler;
 
 		#endregion
 
@@ -30,19 +33,23 @@ namespace VoxelBusters.NativePlugins
 
 		#endregion
 
-		#region Constructors
+		#region Create Methods
 
-		public RateMyApp (IRateMyAppController _controller)
-			: this (_settings: NPSettings.Utility.RateMyApp, _controller: _controller)
-		{}
-
-		public RateMyApp (RateMyAppSettings _settings, IRateMyAppController _controller)
+		public static RateMyApp Create(IRateMyAppViewController _viewController, IRateMyAppKeysCollection _keysCollection, 
+		                               IRateMyAppEventResponder _eventResponder, IRateMyAppOperationHandler _operationHandler, 
+		                               RateMyAppSettings _settings)
 		{
-			// Set properties
-			m_rateMyAppSettings	= _settings;
-			m_controller		= _controller;
+			RateMyApp _newObject	= new RateMyApp() 
+			{
+				m_viewController	= _viewController,
+				m_keysCollection	= _keysCollection,
+				m_eventResponder	= _eventResponder,
+				m_operationHandler	= _operationHandler,
+				m_settings 			= _settings,
+			};
+			_newObject.MarkIfLaunchIsFirstTime();
 
-			MarkIfLaunchIsFirstTime();
+			return _newObject;
 		}
 
 		#endregion
@@ -57,7 +64,7 @@ namespace VoxelBusters.NativePlugins
 			if (!CanAskForReview())
 				return;
 
-			m_controller.ExecuteRoutine(ShowDialogRoutine());
+			m_operationHandler.Execute(ShowDialogRoutine());
 		}
 
 		/// <summary>
@@ -70,10 +77,10 @@ namespace VoxelBusters.NativePlugins
 
 		public void RecordAppLaunch ()
 		{
-			int _appUsageCount	= PlayerPrefs.GetInt(m_controller.GetKeyNameAppUsageCount(), 0) + 1;
+			int _appUsageCount	= PlayerPrefs.GetInt(m_keysCollection.AppUsageCountKeyName, 0) + 1;
 
 			// Write to disk 
-			PlayerPrefs.SetInt(m_controller.GetKeyNameAppUsageCount(), _appUsageCount);
+			PlayerPrefs.SetInt(m_keysCollection.AppUsageCountKeyName, _appUsageCount);
 			PlayerPrefs.Save();
 		}
 
@@ -83,27 +90,21 @@ namespace VoxelBusters.NativePlugins
 
 		private void MarkIfLaunchIsFirstTime ()
 		{
-			bool	_keyFound			= (PlayerPrefs.GetInt(m_controller.GetKeyNameShowPromptAfter(), -1) != -1);
-			bool	_isFirstTimeLaunch	= (!_keyFound)
-				? true
-				: IsFirstTimeLaunch();
+			bool	_keyFound			= (PlayerPrefs.GetInt(m_keysCollection.ShowPromptAfterKeyName, -1) != -1);
+			bool	_isFirstTimeLaunch	= (!_keyFound) ? true : IsFirstTimeLaunch();
 
-			PlayerPrefs.SetInt(
-				key: m_controller.GetKeyNameIsFirstTimeLaunch(), 
-				value: _isFirstTimeLaunch 
-				? 1
-				: 0
-			);	
+			PlayerPrefs.SetInt(key: m_keysCollection.IsFirstTimeLaunchKeyName, 
+			                   value: _isFirstTimeLaunch ? 1 : 0);	
 		}
 
 		private int GetAppUsageCount ()
 		{
-			return PlayerPrefs.GetInt(m_controller.GetKeyNameAppUsageCount(), 0);
+			return PlayerPrefs.GetInt(m_keysCollection.AppUsageCountKeyName, 0);
 		}
 
 		private bool IsFirstTimeLaunch ()
 		{
-			return PlayerPrefs.GetInt(m_controller.GetKeyNameIsFirstTimeLaunch(), 0) == 1;
+			return PlayerPrefs.GetInt(m_keysCollection.IsFirstTimeLaunchKeyName, 0) == 1;
 		}
 
 		private bool CanAskForReview ()
@@ -111,11 +112,11 @@ namespace VoxelBusters.NativePlugins
 			try
 			{
 				// Check if user has asked not to show rate
-				if (PlayerPrefs.GetInt(m_controller.GetKeyNameDontShow(), 0) == 1)
+				if (PlayerPrefs.GetInt(m_keysCollection.DontShowKeyName, 0) == 1)
 					return false;
 				
 				// Check if this version or previous version was already rated
-				string		_lastVersionReviewed	= PlayerPrefs.GetString(m_controller.GetKeyNameVersionLastRated());
+				string		_lastVersionReviewed	= PlayerPrefs.GetString(m_keysCollection.VersionLastRatedKeyName);
 				if (!string.IsNullOrEmpty(_lastVersionReviewed))
 				{
 					string	_currentVersion			= VoxelBusters.Utility.PlayerSettings.GetBundleVersion();
@@ -126,18 +127,18 @@ namespace VoxelBusters.NativePlugins
 				// Find out whether app was just installed and is used for first time
 				// If so, set hours after which rate me is prompted for first time
 				DateTime 	_utcNow					= DateTime.UtcNow;
-				int 		_showPromptAfterHours	= PlayerPrefs.GetInt(m_controller.GetKeyNameShowPromptAfter(), -1);
+				int 		_showPromptAfterHours	= PlayerPrefs.GetInt(m_keysCollection.ShowPromptAfterKeyName, -1);
 
 				if (_showPromptAfterHours == -1)
 				{
-					_showPromptAfterHours	= m_rateMyAppSettings.ShowFirstPromptAfterHours;
+					_showPromptAfterHours	= m_settings.ShowFirstPromptAfterHours;
 						
-					PlayerPrefs.SetInt(m_controller.GetKeyNameShowPromptAfter(), m_rateMyAppSettings.ShowFirstPromptAfterHours);
-					PlayerPrefs.SetString(m_controller.GetKeyNamePromptLastShown(), _utcNow.ToString());
+					PlayerPrefs.SetInt(m_keysCollection.ShowPromptAfterKeyName, m_settings.ShowFirstPromptAfterHours);
+					PlayerPrefs.SetString(m_keysCollection.PromptLastShownKeyName, _utcNow.ToString());
 				} 
 
 				// Check for rest of trigger conditions
-				string 		_promptLastShownOnString	= PlayerPrefs.GetString(m_controller.GetKeyNamePromptLastShown());
+				string 		_promptLastShownOnString	= PlayerPrefs.GetString(m_keysCollection.PromptLastShownKeyName);
 				DateTime 	_promptLastShown			= DateTime.Parse(_promptLastShownOnString);
 				int 		_hoursSincePromptLastShown  = (int)(_utcNow - _promptLastShown).TotalHours;
 				int			_appUsageCount				= GetAppUsageCount();
@@ -149,14 +150,14 @@ namespace VoxelBusters.NativePlugins
 				// Make sure usage count exceeds min count before showing prompt
 				if (!IsFirstTimeLaunch())
 				{
-					if (_appUsageCount <= m_rateMyAppSettings.SuccessivePromptAfterLaunches)
+					if (_appUsageCount <= m_settings.SuccessivePromptAfterLaunches)
 						return false;
 				}
 				
 				// Store information in the preference file
-				PlayerPrefs.SetInt(m_controller.GetKeyNameIsFirstTimeLaunch(), 0);
-				PlayerPrefs.SetInt(m_controller.GetKeyNameAppUsageCount(), 0);
-				PlayerPrefs.SetString(m_controller.GetKeyNamePromptLastShown(), _utcNow.ToString());
+				PlayerPrefs.SetInt(m_keysCollection.IsFirstTimeLaunchKeyName, 0);
+				PlayerPrefs.SetInt(m_keysCollection.AppUsageCountKeyName, 0);
+				PlayerPrefs.SetString(m_keysCollection.PromptLastShownKeyName, _utcNow.ToString());
 
 				return true;
 			}
@@ -183,57 +184,59 @@ namespace VoxelBusters.NativePlugins
 				Delegate.OnBeforeShowingRateMyAppDialog();
 
 			List<string> _buttonList	= new List<string>();
-			_buttonList.Add(m_rateMyAppSettings.RateItButtonText);
-			_buttonList.Add(m_rateMyAppSettings.RemindMeLaterButtonText);
+			_buttonList.Add(m_settings.RateItButtonText);
+			_buttonList.Add(m_settings.RemindMeLaterButtonText);
 
-			if (!string.IsNullOrEmpty(m_rateMyAppSettings.DontAskButtonText))
-				_buttonList.Add(m_rateMyAppSettings.DontAskButtonText);
+			if (!string.IsNullOrEmpty(m_settings.DontAskButtonText))
+				_buttonList.Add(m_settings.DontAskButtonText);
 
-			m_controller.ShowDialog(
-				m_rateMyAppSettings.Title, 		
-				m_rateMyAppSettings.Message, 
-				_buttonList.ToArray(), 	
-				(_buttonName) =>
+			m_viewController.ShowDialog(m_settings.Title, 		
+			                            m_settings.Message, 
+			                            _buttonList.ToArray(), 	
+			                            (_buttonName) =>
+			{
+				if (string.Equals(_buttonName, m_settings.RemindMeLaterButtonText))
 				{
-					if (_buttonName.Equals(m_rateMyAppSettings.RemindMeLaterButtonText))
-					{
-						OnPressingRemindMeLaterButton();
-					}
-					else if (_buttonName.Equals(m_rateMyAppSettings.RateItButtonText))
-					{
-						OnPressingRateItButton();
-					}
-					else
-					{
-						OnPressingDontShowButton();
-					}
-
-					PlayerPrefs.Save();
+					OnPressingRemindMeLaterButton();
 				}
-			);
+				else if (string.Equals(_buttonName, m_settings.RateItButtonText))
+				{
+					OnPressingRateItButton();
+				}
+				else
+				{
+					OnPressingDontShowButton();
+				}
+
+				PlayerPrefs.Save();
+			});
 		}
 		
 		private void OnPressingRemindMeLaterButton ()
 		{
-			PlayerPrefs.SetInt(m_controller.GetKeyNameShowPromptAfter(), m_rateMyAppSettings.SuccessivePromptAfterHours);
+			PlayerPrefs.SetInt(m_keysCollection.ShowPromptAfterKeyName, m_settings.SuccessivePromptAfterHours);
 
-			m_controller.OnPressingRemindMeLaterButton();
+			m_eventResponder.OnRemindMeLater();
 		}
 
 		private void OnPressingRateItButton ()
 		{
 			// Save current version to main bundle
 			string _currentVersion	= VoxelBusters.Utility.PlayerSettings.GetBundleVersion();
-			PlayerPrefs.SetString(m_controller.GetKeyNameVersionLastRated(), _currentVersion);
+			PlayerPrefs.SetString(m_keysCollection.VersionLastRatedKeyName, _currentVersion);
 
-			m_controller.OnPressingRateItButton();
+			m_eventResponder.OnRate();
+
+		#if USES_SOOMLA_GROW
+			NPBinding.SoomlaGrowService.ReportOnUserRating();
+		#endif
 		}
 
 		private void OnPressingDontShowButton ()
 		{
-			PlayerPrefs.SetInt(m_controller.GetKeyNameDontShow(), 1);
+			PlayerPrefs.SetInt(m_keysCollection.DontShowKeyName, 1);
 
-			m_controller.OnPressingDontShowButton();
+			m_eventResponder.OnDontShow();
 		}
 
 		#endregion

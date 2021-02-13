@@ -1,9 +1,8 @@
+#if USES_TWITTER
 using UnityEngine;
 using System.Collections;
-
-#if USES_TWITTER
 using VoxelBusters.Utility;
-using VoxelBusters.DebugPRO;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins
 {
@@ -71,7 +70,7 @@ namespace VoxelBusters.NativePlugins
 
 			// Parse received data
 			ParseSessionData(_sessionJsonDict, out _session);
-			Console.Log(Constants.kDebugTag, "[Twitter] Login success, Session=" + _session);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] Login success, Session=" + _session);
 			
 			// Invoke handler
 			TwitterLoginFinished(_session, null);
@@ -80,7 +79,7 @@ namespace VoxelBusters.NativePlugins
 		
 		protected void TwitterLoginFailed (string _error)
 		{
-			Console.Log(Constants.kDebugTag, "[Twitter] Login failed");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] Login failed");
 
 			// Resume unity player
 			this.ResumeUnity();
@@ -123,7 +122,7 @@ namespace VoxelBusters.NativePlugins
 
 			// Parse received data
 			ParseTweetComposerDismissedData(_resultStr, out _result);
-			Console.Log(Constants.kDebugTag, "[Twitter] Tweet composer was dismissed, Result=" + _result);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] Tweet composer was dismissed, Result=" + _result);
 
 			if (OnTweetComposerClosed != null)
 				OnTweetComposerClosed(_result);
@@ -150,7 +149,7 @@ namespace VoxelBusters.NativePlugins
 
 			// Parse received data
 			ParseUserData(_userJsonDict, out _user);
-			Console.Log(Constants.kDebugTag, "[Twitter] Accessed account details, User=" + _user);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] Accessed account details, User=" + _user);
 
 			// Trigger event
 			if (OnRequestAccountDetailsFinished != null)
@@ -159,7 +158,7 @@ namespace VoxelBusters.NativePlugins
 		
 		protected void RequestAccountDetailsFailed (string _error)
 		{
-			Console.Log(Constants.kDebugTag, "[Twitter] Accessing account details failed, Error=" + _error);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] Accessing account details failed, Error=" + _error);
 
 			if (OnRequestAccountDetailsFinished != null)
 				OnRequestAccountDetailsFinished(null, _error);
@@ -167,7 +166,7 @@ namespace VoxelBusters.NativePlugins
 		
 		protected void RequestEmailAccessSuccess (string _email)
 		{
-			Console.Log(Constants.kDebugTag, "[Twitter] Access to Email is permitted, Email=" + _email);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] Access to Email is permitted, Email=" + _email);
 
 			// Resume unity player
 			this.ResumeUnity();
@@ -178,7 +177,7 @@ namespace VoxelBusters.NativePlugins
 		
 		protected void RequestEmailAccessFailed (string _error)
 		{
-			Console.Log(Constants.kDebugTag, "[Twitter] Access to Email is not permitted, Error=" + _error);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] Access to Email is not permitted, Error=" + _error);
 
 			// Resume unity player
 			this.ResumeUnity();
@@ -189,7 +188,7 @@ namespace VoxelBusters.NativePlugins
 		
 		protected void TwitterURLRequestSuccess (string _responseJsonStr)
 		{
-			Console.Log(Constants.kDebugTag, "[Twitter] URL request success, Response=" + _responseJsonStr);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] URL request success, Response=" + _responseJsonStr);
 
 			if (OnTwitterURLRequestFinished != null)
 			{
@@ -203,7 +202,7 @@ namespace VoxelBusters.NativePlugins
 		
 		protected void TwitterURLRequestFailed (string _error)
 		{
-			Console.Log(Constants.kDebugTag, "[Twitter] URL request failed, Error=" + _error);
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[Twitter] URL request failed, Error=" + _error);
 
 			if (OnTwitterURLRequestFinished != null)
 				OnTwitterURLRequestFinished(null, _error);

@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+﻿#if USES_NOTIFICATION_SERVICE && UNITY_ANDROID
+using UnityEngine;
 using System.Collections;
-
-#if USES_NOTIFICATION_SERVICE && UNITY_ANDROID
 using System;
 using System.Collections.Generic;
-using VoxelBusters.DebugPRO;
 using VoxelBusters.Utility;
+using VoxelBusters.UASUtils;
 
 namespace VoxelBusters.NativePlugins.Internal
 {
@@ -83,7 +82,7 @@ namespace VoxelBusters.NativePlugins.Internal
 			if (_payloadDict.Contains(NPSettings.Notification.Android.ContentTextKey))
 			{
 				//Check here which key is being received.
-				VoxelBusters.DebugPRO.Console.Log(Constants.kDebugTag, "[AndroidNotificationPayload] " + _payloadDict.ToJSON());//TODO
+				DebugUtility.Logger.Log(Constants.kDebugTag, "[AndroidNotificationPayload] " + _payloadDict.ToJSON());//TODO
 				object _alertUnknownType	= _payloadDict[ContentTextKey] as object;
 				
 				// String type

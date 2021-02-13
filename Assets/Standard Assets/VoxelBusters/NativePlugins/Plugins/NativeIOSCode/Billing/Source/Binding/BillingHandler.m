@@ -51,6 +51,11 @@
 
 #pragma mark - LifeCycle Methods
 
++ (void)load
+{
+    [BillingHandler Instance];
+}
+
 - (id)init
 {
     if ((self = [super init]))

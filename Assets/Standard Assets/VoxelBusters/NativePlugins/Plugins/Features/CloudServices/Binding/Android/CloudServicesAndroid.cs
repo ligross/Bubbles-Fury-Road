@@ -16,7 +16,7 @@ namespace VoxelBusters.NativePlugins
 		private bool			m_isSyncInProgress;
 		private bool			m_isSyncManually;
 		private double			m_lastSyncTimeStamp;			
-		private bool			m_isInitialised;			
+		private bool			m_isInternalLibraryInitialised;			
 		
 		#endregion
 
@@ -48,7 +48,7 @@ namespace VoxelBusters.NativePlugins
 			// Native method call
 			Plugin.Call(Native.Methods.INITIALISE);
 
-			m_isInitialised = true;
+			m_isInternalLibraryInitialised = true;
 		}
 
 		private bool IsSignedIn()
@@ -152,13 +152,18 @@ namespace VoxelBusters.NativePlugins
 			RemoveKeyValuePair(_key);
 		}
 
+		public override void RemoveAllKeys ()
+		{
+			RemoveAllKeyValuePairs();
+		}
+
 		#endregion
 
 		#region Unity Methods
 
 		private void Update()
 		{
-			if (m_isInitialised)
+			if (m_isInternalLibraryInitialised)
 			{
 				// Here schedule a load for every interval
 				double _elapsedTime = (Time.realtimeSinceStartup - m_lastSyncTimeStamp);

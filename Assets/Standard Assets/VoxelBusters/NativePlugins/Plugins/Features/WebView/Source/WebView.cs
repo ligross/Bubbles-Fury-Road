@@ -1,9 +1,9 @@
-﻿#if USES_WEBVIEW
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using VoxelBusters.NativePlugins;
-using VoxelBusters.DebugPRO;
 using VoxelBusters.Utility;
+using VoxelBusters.UASUtils;
+
 using URLAddress = VoxelBusters.Utility.URL;
 
 namespace VoxelBusters.NativePlugins
@@ -85,6 +85,7 @@ namespace VoxelBusters.NativePlugins
 	/// </code>
 	/// </example>
 	public class WebView : MonoBehaviour 
+	#if USES_WEBVIEW
 	{
 		#region Fields
 
@@ -521,7 +522,7 @@ namespace VoxelBusters.NativePlugins
 		{
 			if (string.IsNullOrEmpty(_URL) || !_URL.Contains("://"))
 			{
-				Console.LogError(Constants.kDebugTag, "[WebView] Load request failed, please use a valid URL");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[WebView] Load request failed, please use a valid URL");
 				return;
 			}
 
@@ -551,7 +552,7 @@ namespace VoxelBusters.NativePlugins
 				}
 				else
 				{
-					Console.LogError(Constants.kDebugTag, "[WebView] The operation could not be completed. Error=" + _error);
+					DebugUtility.Logger.LogError(Constants.kDebugTag, "[WebView] The operation could not be completed. Error=" + _error);
 					return;
 				}
 			};
@@ -593,7 +594,7 @@ namespace VoxelBusters.NativePlugins
 			// Invalid HTML string
 			if (string.IsNullOrEmpty(_HTMLString))
 			{
-				Console.LogError(Constants.kDebugTag, "[WebView] Failed to load HTML contents, HTMLString=" + _HTMLString);
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[WebView] Failed to load HTML contents, HTMLString=" + _HTMLString);
 				return;
 			}
 
@@ -644,7 +645,7 @@ namespace VoxelBusters.NativePlugins
 		{
 			if (_byteArray == null)
 			{
-				Console.LogError(Constants.kDebugTag, "[WebView] Load data failed");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[WebView] Load data failed");
 				return;
 			}
 
@@ -718,7 +719,7 @@ namespace VoxelBusters.NativePlugins
 		{
 			if (string.IsNullOrEmpty(_URLSchemeName))
 			{
-				Console.LogError(Constants.kDebugTag, "[WebView] Failed to add URL scheme");
+				DebugUtility.Logger.LogError(Constants.kDebugTag, "[WebView] Failed to add URL scheme");
 				return;
 			}
 
@@ -766,7 +767,7 @@ namespace VoxelBusters.NativePlugins
 
 		private void OnDidShow ()
 		{
-			Console.Log(Constants.kDebugTag, "[WebView] Received showing web view event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[WebView] Received showing web view event.");
 
 			// Send event
 			if (DidShowEvent != null)
@@ -775,7 +776,7 @@ namespace VoxelBusters.NativePlugins
 		
 		private void OnDidHide ()
 		{
-			Console.Log(Constants.kDebugTag, "[WebView] Received dismissed web view event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[WebView] Received dismissed web view event.");
 
 			// Send event
 			if (DidHideEvent != null)
@@ -784,7 +785,7 @@ namespace VoxelBusters.NativePlugins
 
 		private void OnDidDestroy ()
 		{
-			Console.Log(Constants.kDebugTag, "[WebView] Received destroyed web view event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[WebView] Received destroyed web view event.");
 
 			// Send event
 			if (DidDestroyEvent != null)
@@ -793,7 +794,7 @@ namespace VoxelBusters.NativePlugins
 		
 		private void OnDidStartLoad ()
 		{
-			Console.Log(Constants.kDebugTag, "[WebView] Received webpage loading started event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[WebView] Received webpage loading started event.");
 
 			// Send event
 			if (DidStartLoadEvent != null)
@@ -802,7 +803,7 @@ namespace VoxelBusters.NativePlugins
 		
 		private void OnDidFinishLoad (string _URL)
 		{
-			Console.Log(Constants.kDebugTag, "[WebView] Received webpage loading finished event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[WebView] Received webpage loading finished event.");
 			
 			// Update properties
 			this.URL	= _URL;
@@ -814,7 +815,7 @@ namespace VoxelBusters.NativePlugins
 
 		private void OnDidFailLoadWithError (string _URL, string _error)
 		{
-			Console.Log(Constants.kDebugTag, "[WebView] Received webpage loading failed event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[WebView] Received webpage loading failed event.");
 			
 			// Update properties
 			this.URL	= _URL;
@@ -826,7 +827,7 @@ namespace VoxelBusters.NativePlugins
 
 		private void OnDidFinishEvaluatingJavaScript (string _result)
 		{
-			Console.Log(Constants.kDebugTag, "[WebView] Received JavaScript execution finished event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[WebView] Received JavaScript execution finished event.");
 
 			// Send event
 			if (DidFinishEvaluatingJavaScriptEvent != null)
@@ -835,7 +836,7 @@ namespace VoxelBusters.NativePlugins
 
 		private void OnDidReceiveMessage (WebViewMessage _message)
 		{
-			Console.Log(Constants.kDebugTag, "[WebView] Received web view message event.");
+			DebugUtility.Logger.Log(Constants.kDebugTag, "[WebView] Received web view message event.");
 
 			// Send event
 			if (DidReceiveMessageEvent != null)
@@ -844,5 +845,7 @@ namespace VoxelBusters.NativePlugins
 
 		#endregion
 	}
+	#else
+	{}
+	#endif
 }
-#endif

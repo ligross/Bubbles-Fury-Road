@@ -22,7 +22,7 @@ namespace VoxelBusters.Utility
 #if UNITY_5_6_OR_NEWER
 			return UnityEditor.PlayerSettings.applicationIdentifier;
 #else
-			return UnityEditor.PlayerSettings.bundleIdentifier;
+			return UnityEditor.PlayerSettings.applicationIdentifier;
 #endif
 #else
 			return NativeBinding.GetBundleIdentifier();
